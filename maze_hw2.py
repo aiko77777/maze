@@ -13,3 +13,5 @@ del(array[0])
 
 for j in array:
     print(j)
+#print(row_num)
+#print(col_num)
