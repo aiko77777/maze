@@ -27,7 +27,7 @@ for x in array:
     rows+=1
 print("start=",start_i,start_j)
 print("destination=",destination_i,destination_j)
-#########################################
+#########################################find the destination with recursion
 def move(position_i,position_j):
     if array[position_i+1][position_j]=="201" or array[position_i][position_j+1]=="201" or array[position_i-1][position_j]=="201" or array[position_i][position_j-1]=="201":    #distinguish whether 4 directions are the destination
         success=1
@@ -35,27 +35,28 @@ def move(position_i,position_j):
         return success
         
     else:
-        if array[position_i][position_j+1]=='0'and array[position_i][position_j+1]!="p":    #right
+        if (array[position_i][position_j+1]!='1' and array[position_i][position_j+1]!="p" and array[position_i][position_j+1]!="N" ):    #right
             array[position_i][position_j]="p"
             print("right")
             move(position_i,position_j+1)  
-        elif array[position_i+1][position_j]=='0' and array[position_i+1][position_j]!='p': #down
+        elif (array[position_i+1][position_j]!='1' and array[position_i+1][position_j]!='p' and array[position_i+1][position_j]!='N'): #down
             array[position_i][position_j]="p"
             move(position_i+1,position_j)  
             print("down")
 
-        elif array[position_i][position_j-1]=='0' and array[position_i][position_j-1]!="p": #left
+        elif (array[position_i][position_j-1]!='1'  and array[position_i][position_j-1]!="p" and array[position_i][position_j-1]!='N') : #left
             array[position_i][position_j]="p"
             move(position_i,position_j-1)
             print("left")
-        elif array[position_i-1][position_j]=='0' and array[position_i-1][position_j]!="p": #up
+        elif (array[position_i-1][position_j]!='1'  and array[position_i-1][position_j]!="p"  and array[position_i-1][position_j]!="N") : #up
             array[position_i][position_j]="p"
             move(position_i-1,position_j)
             print("up")
 
         else:
-            move(position_i,position_j-1)   #deal with the condition facing dead end
             array[position_i][position_j]="N"
+            move(position_i,position_j-1)   #deal with the condition that may face dead end
+            
         
 
 start=[start_i,start_j]
@@ -66,4 +67,4 @@ for x in array:
     print(x)
 
 # note:
-# array[i][j]="p" first or recursion first???
+# array[i][j]="p" first or recursion first???-->指定"N" or "p" 跟recursion 先後順序有影響，必須先指定"N" or "P"
